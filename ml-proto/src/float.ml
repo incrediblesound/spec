@@ -7,6 +7,9 @@ let bits_of_float f = 0   (* TODO *)
 
 let isnan f = f <> f
 
+let is_even f =
+  (mod_float f 2.0) = 0.0
+
 (* TODO: Do something meaningful with nondeterminism *)
 let float64_nondeterministic_nan =
   0x7fff0f0f0f0f0f0f
@@ -62,7 +65,7 @@ let float64_trunc x =
   (* preserve the sign of zero *)
   if xf = 0.0 then x else
   (* trunc is either ceil or floor depending on which one is toward zero *)
-  let f = if xf < 0.0 then ceil xf else floor xf
+  let f = if xf < 0.0 then ceil xf else floor xf in
   if isnan f then float64_nondeterministic_nan else bits_of_float f
 
 let float64_nearestint x =
@@ -74,7 +77,7 @@ let float64_nearestint x =
   let d = floor xf in
   let um = abs_float (xf -. u) in
   let dm = abs_float (xf -. d) in
-  let u_or_d = um < dm || ((um = dm) && (((bits_of_float u) land 1) = 0)) in
+  let u_or_d = um < dm || ((um = dm) && (is_even u)) in
   let f = if u_or_d then u else d in
   if isnan f then float64_nondeterministic_nan else bits_of_float f
 
