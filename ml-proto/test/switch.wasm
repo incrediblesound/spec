@@ -10,7 +10,7 @@
         (case 0 (return (getlocal $i)))
         (case 1 (nop) fallthru)
         (case 2)  ;; implicit fallthru
-        (case 3 (setlocal $j (neg.i32 (getlocal $i))) (break))
+        (case 3 (setlocal $j (sub.i32 (const.i32 0) (getlocal $i))) (break))
         (case 4 (break))
         (case 5 (setlocal $j (const.i32 101)))
         (case 6 (setlocal $j (const.i32 101)) fallthru)
@@ -30,7 +30,7 @@
           (case 0 (return (getlocal $i)))
           (case 1 (nop) fallthru)
           (case 2)  ;; implicit fallthru
-          (case 3 (break $l (neg.i64 (getlocal $i))))
+          (case 3 (break $l (sub.i64 (const.i64 0) (getlocal $i))))
           (case 6 (setlocal $j (const.i64 101)) fallthru)
           (;default;) (getlocal $j)
         )

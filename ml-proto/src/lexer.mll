@@ -162,11 +162,9 @@ rule token = parse
   | "const."(nxx as t) { CONST (value_type t) }
   | "switch."(nxx as t) { SWITCH (value_type t) }
 
-  | "neg."(ixx as t) { UNARY (intop t I32.Neg I64.Neg) }
-  | "abs."(ixx as t) { UNARY (intop t I32.Abs I64.Abs) }
-  | "not."(ixx as t) { UNARY (intop t I32.Not I64.Not) }
   | "clz."(ixx as t) { UNARY (intop t I32.Clz I64.Clz) }
   | "ctz."(ixx as t) { UNARY (intop t I32.Ctz I64.Ctz) }
+  | "popcnt."(ixx as t) { UNARY (intop t I32.Popcnt I64.Popcnt) }
   | "neg."(fxx as t) { UNARY (floatop t F32.Neg F64.Neg) }
   | "abs."(fxx as t) { UNARY (floatop t F32.Abs F64.Abs) }
   | "ceil."(fxx as t) { UNARY (floatop t F32.Ceil F64.Ceil) }
